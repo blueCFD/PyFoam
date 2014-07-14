@@ -1,0 +1,77 @@
+Introduction
+============
+
+The current port of PyFoam for Windows is still incomplete. The main reason for
+this is because PyFoam was designed to work on POSIX systems, such as Linux and
+Mac OS X; unfortunately, Windows is not a fully compliant POSIX system, which
+means that some of the POSIX-only features used in PyFoam through Python, will
+not work as intended on Windows.
+
+Issue tracking on problems related to this port are tracked at the dedicated
+project for this port of PyFoam for Windows:
+   https://github.com/blueCFD/PyFoam/issues
+
+In addition, using OpenFOAM(R) on Windows isn't straight forward either, as it
+is not officially supported by the OpenFOAM Foundation. This means that a
+unofficial working OpenFOAM installation for Windows must be previously
+installed; a reference list is provided here:
+   http://openfoamwiki.net/index.php/Windows
+
+
+Note: The instructions below have only been tested with blueCFD-Core 2.3,
+blueCFD-Core 2.1-2 and blueCFD-SingleCore 2.1-2.
+
+
+Requirements
+============
+
+These are the minimum requirements:
+
+ * Python for Windows
+ * OpenFOAM for Windows
+ * A working MSys shell or Windows Command Line environment for using OpenFOAM
+   and Python.
+
+Keep in mind that if you want to use VTK with PyFoam, you can use the one that
+comes with ParaView, but in such a case, it's advisable to use the same version
+of Python as the one provided with ParaView.
+
+
+Installation
+============
+
+  1. Start an MSys shell/terminal or a Windows Command Line, with your working
+     OpenFOAM installation.
+  
+  2. Download and unpack PyFoam, preferably in the user folder at your OpenFOAM
+     installation. For example, in an MSys terminal, by running:
+
+        mkdir -p $WM_USER_PROJECT_DIR
+        cd $WM_USER_PROJECT_DIR
+        tar -xf PyFoam-Windows-0.6.3.tar.gz
+  
+  3. Go into the unpacked PyFoam folder:
+
+        cd PyFoam
+  
+  4. Depending on the shell/command interface you're using, follow the
+     associated steps:
+     
+     * MSys terminal/shell:
+     
+        mkdir -p $WM_PROJECT_DIR/etc/config.d
+        cp contrib/Windows/PyFoam.* $WM_PROJECT_DIR/etc/config.d/
+        source $WM_PROJECT_DIR/etc/config.d/PyFoam.sh
+        ./msyssetup.sh
+        
+     * Windows Command Line:
+     
+        mkdir %WM_PROJECT_DIR%\etc\config.d\
+        xcopy contrib\Windows\PyFoam.* %WM_PROJECT_DIR%\etc\config.d\
+        call %WM_PROJECT_DIR%\etc\config.d\PyFoam.bat
+        .\winsetup.bat
+
+  5. Now, in order to see what commands you have available to use, run:
+  
+        PyFoam
+
