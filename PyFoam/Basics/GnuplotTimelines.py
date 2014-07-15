@@ -82,6 +82,8 @@ class GnuplotTimelines(GeneralPlotTimelines,Gnuplot):
                 self.set_string("terminal x11"+x11addition)
                 # self.set_string("terminal aqua "+str(GnuplotTimelines.terminalNr))
                 GnuplotTimelines.terminalNr+=1
+            elif uname()[0]=="Windows":
+                self.set_string("terminal wxt"+x11addition)
             else:
                 self.set_string("terminal x11"+x11addition)
         else:
