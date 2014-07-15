@@ -331,6 +331,7 @@ class AnalyzedCommon(object):
             pick=pickle.Pickler(open(pickleFile+".tmp","wb"))
             pick.dump(lines.prepareForTransfer())
             pick.dump(plots.prepareForTransfer())
+            del pick
             move(pickleFile+".tmp",pickleFile)
 
             if hasattr(self,"data"):
