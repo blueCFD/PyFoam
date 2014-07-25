@@ -204,7 +204,7 @@ uses Tkinter and is no longer activly developed.  Use the QT-version.
         text=vtk.vtkVectorText()
         text.SetText(str(index))
         tMapper=vtk.vtkPolyDataMapper()
-        tMapper.SetInput(text.GetOutput())
+        tMapper.SetInputConnection(text.GetOutputPort())
         tActor = vtk.vtkFollower()
         tActor.SetMapper(tMapper)
         tActor.SetScale(2*self.vRadius,2*self.vRadius,2*self.vRadius)
@@ -245,11 +245,11 @@ uses Tkinter and is no longer activly developed.  Use the QT-version.
         tube=vtk.vtkTubeFilter()
         tube.SetRadius(self.vRadius*0.5)
         tube.SetNumberOfSides(10)
-        tube.SetInput(line.GetOutput())
+        tube.SetInputConnection(line.GetOutputPort())
         text=vtk.vtkVectorText()
         text.SetText(label)
         tMapper=vtk.vtkPolyDataMapper()
-        tMapper.SetInput(text.GetOutput())
+        tMapper.SetInputConnection(text.GetOutputPort())
         tActor = vtk.vtkFollower()
         tActor.SetMapper(tMapper)
         tActor.SetScale(self.vRadius,self.vRadius,self.vRadius)
@@ -323,8 +323,8 @@ uses Tkinter and is no longer activly developed.  Use the QT-version.
         append=vtk.vtkAppendPolyData()
         for a in self.vActors:
             if a!=None:
-                append.AddInput(a.GetMapper().GetInput())
-        self.axes.SetInput(append.GetOutput())
+                append.AddInputConnection(a.GetMapper().GetInputConnection(0,0))
+        self.axes.SetInputConnection(append.GetOutputPort())
 
 
     # Define a quit method that exits cleanly.
