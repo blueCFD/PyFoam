@@ -23,3 +23,10 @@ rem ----------------------------------------------------------------------------
 set PYFOAM_ARCH_PATH=%WM_THIRD_PARTY_DIR%\platforms\%WM_ARCH%%WM_COMPILER%\PyFoam
 set PYTHONPATH=%PYFOAM_ARCH_PATH%\lib\site-packages;%PYTHONPATH%
 set PATH=%PATH%;%PYFOAM_ARCH_PATH%\bin
+
+IF NOT EXIST "%PARAVIEW_DIR%" GOTO END
+
+:SETITUP
+set PYTHONPATH=%PARAVIEW_DIR%\lib\paraview-%PARAVIEW_MAJOR%\site-packages\vtk;%PYTHONPATH%
+
+:END

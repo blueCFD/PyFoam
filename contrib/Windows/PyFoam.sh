@@ -27,4 +27,12 @@ TARGETFOLDER=`cmd //c echo %PYFOAM_ARCH_PATH% | sed -e 's=/=\\\\=g'`
 export PYTHONPATH=$TARGETFOLDER\\lib\\site-packages\;$PYTHONPATH
 unset TARGETFOLDER
 
+if [ -d "$ParaView_DIR" ]
+then
+    export TARGETFOLDER=$ParaView_DIR\\lib\\paraview-$ParaView_MAJOR\\site-packages\\vtk
+    export TARGETFOLDER=`cmd //c echo %TARGETFOLDER% | sed -e 's=/=\\\\=g'`
+    export PYTHONPATH=$TARGETFOLDER\;$PYTHONPATH
+    unset TARGETFOLDER
+fi
+
 # ----------------------------------------------------------------- end-of-file
