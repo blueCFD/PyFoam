@@ -51,7 +51,7 @@ echo   set ARGUMENTS=%%ARGUMENTS%% %%1 >> "%cmdJumpBatch%"
 echo   shift >> "%cmdJumpBatch%"
 echo   goto LOOP >> "%cmdJumpBatch%"
 echo :AFTERLOOP >> "%cmdJumpBatch%"
-echo python %%PYFOAM_ARCH_PATH%%/Scripts/%pythonScriptName%.py %%ARGUMENTS%% >> "%cmdJumpBatch%"
+echo python "%%PYFOAM_ARCH_PATH%%"/Scripts/%pythonScriptName%.py %%ARGUMENTS%% >> "%cmdJumpBatch%"
 
 rem unset variables
 set cmdJumpBatch=

@@ -62,7 +62,7 @@ for pythonScript in "$PYFOAM_ARCH_PATH/Scripts"/*.py ; do
   echo "  shift" >> "${cmdJumpBatch}"
   echo "  goto LOOP" >> "${cmdJumpBatch}"
   echo ":AFTERLOOP" >> "${cmdJumpBatch}"
-  echo "python %PYFOAM_ARCH_PATH%/Scripts/${pythonScriptName}.py %ARGUMENTS%" >> "${cmdJumpBatch}"
+  echo "python \"%PYFOAM_ARCH_PATH%\"/Scripts/${pythonScriptName}.py %ARGUMENTS%" >> "${cmdJumpBatch}"
 done
 
 cmdJumpBatch="$PYFOAM_BINARY_FOLDER/PyFoam.bat"
