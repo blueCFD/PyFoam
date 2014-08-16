@@ -8,6 +8,7 @@ from PyFoam.ThirdParty.six import print_
 from PyFoam.Error import warning
 import subprocess
 import os,fnmatch
+from platform import uname
 
 if sys.version_info<(2,6):
     from popen2 import popen4
@@ -40,6 +41,11 @@ class Utilities(object):
         if debug:
             print_(cmd)
 
+        if uname()[0]=="Windows":
+            canCloseFDS=False
+        else:
+            canCloseFDS=True
+
         oldDir=None
         if workdir:
             oldDir=os.getcwd()
@@ -49,7 +55,7 @@ class Utilities(object):
             raus,rein = popen4(cmd)
         else:
             p = Popen(cmd, shell=True,
-                      stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+                      stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=canCloseFDS)
             (rein,raus)=(p.stdin,p.stdout)
         if echo!=None:
             tmp=[]

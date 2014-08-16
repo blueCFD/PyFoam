@@ -24,7 +24,7 @@ try:
     from os import getlogin
 except ImportError:
     try:
-        import PyFoam.ThirdParty.winhacks
+        from PyFoam.ThirdParty.winhacks import getlogin
     except ImportError:
         print_("Unable to import the getlogin function.")
         import sys
