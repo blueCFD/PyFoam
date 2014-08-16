@@ -18,6 +18,7 @@ format.getConfigFormat("warn")
 import sys
 from os import path,getcwd,environ
 from copy import deepcopy
+from platform import uname
 
 from PyFoam.ThirdParty.six import print_
 from PyFoam.ThirdParty.six import iteritems
@@ -215,7 +216,7 @@ class PyFoamApplication(object):
                        dest="catchUSR1Signal",
                        default=False,
                        action="store_true",
-                       help="If the USR1-signal is sent to the application with 'kill -USR1 <pid>' the application ens and prints a traceback. If interactive debugging is enabled then the debugger is entered. Use to investigate hangups")
+                       help="If the USR1-signal is sent to the application with 'kill -USR1 <pid>' the application ens and prints a traceback. If interactive debugging is enabled then the debugger is entered. Use to investigate hangups. (Disabled on Windows.)")
         dbg.add_option("--also-catch-TERM-signal",
                        dest="alsoCatchTERMsignal",
                        default=False,
@@ -286,7 +287,7 @@ with these option for commands that generate a lot of output""")
                                                                a3,
                                                                debugOnSyntaxError=self.opts.syntaxErrorDebugger)
             self.opts.traceback=True
-        if self.opts.catchUSR1Signal:
+        if self.opts.catchUSR1Signal and uname()[0]!="Windows":
              import signal
              signal.signal(signal.SIGUSR1,pyFoamSIG1HandlerPrintStack)
              if self.opts.alsoCatchTERMsignal:
