@@ -149,7 +149,7 @@ class FoamThread(Thread):
         self.resStart=getrusage(self.who)
         self.timeStart=time()
 
-        if uname()[0]=="Windows":
+        if self.isWindows:
             canCloseFDS=False
         else:
             canCloseFDS=True
