@@ -58,11 +58,31 @@ os.getlogin = getlogin
 os.getloadavg = getloadavg
 
 """These 3 can be improved if we use http://code.google.com/p/psutil/"""
+"""Issue for solving this: https://github.com/blueCFD/PyFoam/issues/2"""
 """All return 1 to avoid divisions by zero"""
 def getrusage(who):
-  return 1
+    class DummyRUsage(object):
+        ru_utime=1    # time in user mode (float)
+        ru_stime=1    # time in system mode (float)
+        ru_maxrss=1   # maximum resident set size
+        ru_ixrss=1    # shared memory size
+        ru_idrss=1    # unshared memory size
+        ru_isrss=1    # unshared stack size
+        ru_minflt=1   # page faults not requiring I/O
+        ru_majflt=1   # page faults requiring I/O
+        ru_nswap=1    # number of swap outs
+        ru_inblock=1  # block input operations
+        ru_oublock=1  # block output operations
+        ru_msgsnd=1   # messages sent
+        ru_msgrcv=1   # messages received
+        ru_nsignals=1 # signals received
+        ru_nvcsw=1    # voluntary context switches
+        ru_nivcsw=1   # involuntary context switches
+
+
+    return DummyRUsage()
 
 def getpagesize():
-  return 1
+    return 1
 
 RUSAGE_CHILDREN = 1

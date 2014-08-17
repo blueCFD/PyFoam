@@ -32,7 +32,7 @@ class GnuplotOpts:
     # quote backslashes in the filename.  Example:
     #
     #     gnuplot_command = r'"C:\Program Files\gp371w32\pgnuplot.exe"'
-    gnuplot_command = r'pgnuplot.exe'
+    gnuplot_command = r'gnuplot.exe'
 
     # The '-persist' option is not supported on windows:
     recognizes_persist = 0
@@ -102,13 +102,15 @@ class GnuplotProcess:
         Keyword arguments:
 
             'persist' -- the '-persist' option is not supported under
-                Windows so this argument must be zero.
+                Windows so this argument must be zero and will be
+                ignored if otherwise.
 
         """
 
-        if persist:
-            raise Errors.OptionError(
-                '-persist is not supported under Windows!')
+        # Ignore if the persist option is used
+        #if persist:
+        #    raise Errors.OptionError(
+        #        '-persist is not supported under Windows!')
 
         self.gnuplot = popen(GnuplotOpts.gnuplot_command, 'w')
 

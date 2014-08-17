@@ -149,13 +149,18 @@ class FoamThread(Thread):
         self.resStart=getrusage(self.who)
         self.timeStart=time()
 
+        if uname()[0]=="Windows":
+            canCloseFDS=False
+        else:
+            canCloseFDS=True
+
         if sys.version_info<(2,4):
             run=Popen4(self.cmdline)
             self.output=run.fromchild
         else:
             run=subprocess.Popen(self.cmdline,shell=True,bufsize=0,
                       stdin=subprocess.PIPE,stdout=subprocess.PIPE,
-                      stderr=subprocess.STDOUT,close_fds=True)
+                      stderr=subprocess.STDOUT,close_fds=canCloseFDS)
             self.output=run.stdout
         self.run=run
         self.threadPid=run.pid
