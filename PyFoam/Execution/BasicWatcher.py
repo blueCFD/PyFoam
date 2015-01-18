@@ -54,7 +54,7 @@ class BasicWatcher(object):
         if ext=='.gz':
             fh=gzip.open(self.filename)
         else:
-            fh=open(self.filename)
+            fh=open(self.filename,'rb')
 
         self.startHandle()
 

@@ -380,7 +380,8 @@ class _NewFileItem(_FileItem):
         _FileItem.__init__(self, filename, **keyw)
 
     def __del__(self):
-        if self.temp:
+        #checking if os still exists is needed in Windows
+        if os and self.temp:
             os.unlink(self.filename)
 
 
